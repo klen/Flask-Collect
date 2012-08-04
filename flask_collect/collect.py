@@ -26,7 +26,7 @@ class Collect():
 
     def init_script(self, manager):
         @manager.command
-        def collect(verbose=False):
+        def collect(verbose=True):
             " Collect static from blueprints. "
             self.collect(verbose=verbose)
         assert collect
