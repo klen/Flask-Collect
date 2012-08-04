@@ -1,0 +1,2 @@
+recursive-include flask_collect *
+exclude *.pyc *.orig
