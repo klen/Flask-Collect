@@ -15,11 +15,7 @@ class Collect():
 
         if not hasattr(self.app, 'extensions'):
             self.app.extensions = dict()
-
-        if 'static' in self.app.extensions:
-            raise Exception('Can not have more than one instance of the Static class associated with Flask application')
-
-        self.app.extensions['static'] = self
+        self.app.extensions['collect'] = self
 
         self.static_root = self.app.config.get('COLLECT_STATIC_ROOT', op.join(self.app.root_path, 'static')).rstrip('/')
         self.storage = self.app.config.get('COLLECT_STORAGE', 'flask.ext.collect.storage.file')
