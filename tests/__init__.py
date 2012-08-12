@@ -10,11 +10,7 @@ class BaseTest(TestCase):
 
         app = Flask(__name__)
 
-        @app.route('/')
-        def hello_world():
-            return 'Hello World!'
-
-        blueprint = Blueprint('test1', __name__, static_folder='static1')
+        blueprint = Blueprint('test1', __name__, static_folder='static1', static_url_path='/static/test1')
         app.register_blueprint(blueprint)
 
         blueprint = Blueprint('test2', __name__, static_folder='static2')
@@ -27,5 +23,5 @@ class BaseTest(TestCase):
         collect = Collect(app)
         collect.collect(verbose=True)
 
-        assert op.exists(op.join(static_root, 'test.css'))
+        assert op.exists(op.join(static_root, 'test1', 'test.css'))
         assert op.exists(op.join(static_root, 'js', 'test.js'))
