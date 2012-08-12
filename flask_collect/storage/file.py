@@ -1,12 +1,13 @@
 from os import path as op, makedirs
 from shutil import copy2
+
 from .base import BaseStorage
 
 
 class Storage(BaseStorage):
 
     def run(self):
-        self.log("Flask-Static collect static.")
+        self.log("Collect static from blueprints.")
         for f, o in self:
             destination = op.join(self.collect.static_root, o)
             destination_dir = op.dirname(destination)
@@ -15,4 +16,4 @@ class Storage(BaseStorage):
 
             if not op.exists(destination) or op.getmtime(destination) < op.getmtime(f):
                 copy2(f, destination)
-                self.log("Copied: %s" % destination)
+                self.log("Copied: %s -> %s" % (f, destination))
