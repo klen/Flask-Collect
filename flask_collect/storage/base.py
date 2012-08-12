@@ -9,13 +9,16 @@ class BaseStorage():
 
     def __iter__(self):
         " Seek static files and result full and relative paths. "
-        for bp in self.collect.app.blueprints.values():
+        app = self.collect.app
+        for bp in app.blueprints.values():
             if bp.static_folder and op.isdir(bp.static_folder):
                 for root, _, files in walk(bp.static_folder):
                     for f in files:
                         fpath = op.join(root, f)
                         opath = op.relpath(fpath, bp.static_folder.rstrip('/'))
-                        yield fpath, opath
+                        if bp.static_url_path and bp.static_url_path.startswith(op.join(app.static_url_path, '')):
+                            opath = op.join(op.relpath(bp.static_url_path, app.static_url_path), opath)
+                        yield bp, fpath, opath
 
     def log(self, msg):
         if self.verbose:

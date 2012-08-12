@@ -8,7 +8,7 @@ class Storage(BaseStorage):
 
     def run(self):
         self.log("Collect static from blueprints.")
-        for f, o in self:
+        for bp, f, o in self:
             destination = op.join(self.collect.static_root, o)
             destination_dir = op.dirname(destination)
             if not op.exists(destination_dir):
@@ -16,4 +16,4 @@ class Storage(BaseStorage):
 
             if not op.exists(destination) or op.getmtime(destination) < op.getmtime(f):
                 copy2(f, destination)
-                self.log("Copied: %s -> %s" % (f, destination))
+                self.log("Copied: [%s] '%s'" % (bp.name, op.join(self.collect.app.static_url_path, destination)))
