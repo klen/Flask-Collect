@@ -17,8 +17,10 @@ class Collect():
             self.app.extensions = dict()
         self.app.extensions['collect'] = self
 
-        self.static_root = self.app.config.get('COLLECT_STATIC_ROOT', op.join(self.app.root_path, 'static')).rstrip('/')
-        self.storage = self.app.config.get('COLLECT_STORAGE', 'flask.ext.collect.storage.file')
+        self.static_root = self.app.config.get('COLLECT_STATIC_ROOT',
+                                               op.join(self.app.root_path, 'static')).rstrip('/')
+        self.storage = self.app.config.get(
+            'COLLECT_STORAGE', 'flask.ext.collect.storage.file')
 
     def init_script(self, manager):
         @manager.command

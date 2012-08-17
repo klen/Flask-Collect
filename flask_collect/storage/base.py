@@ -17,7 +17,8 @@ class BaseStorage():
                         fpath = op.join(root, f)
                         opath = op.relpath(fpath, bp.static_folder.rstrip('/'))
                         if bp.static_url_path and bp.static_url_path.startswith(op.join(app.static_url_path, '')):
-                            opath = op.join(op.relpath(bp.static_url_path, app.static_url_path), opath)
+                            opath = op.join(op.relpath(bp.
+                                                       static_url_path, app.static_url_path), opath)
                         yield bp, fpath, opath
 
     def log(self, msg):

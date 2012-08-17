@@ -16,4 +16,5 @@ class Storage(BaseStorage):
 
             if not op.exists(destination) or op.getmtime(destination) < op.getmtime(f):
                 copy2(f, destination)
-                self.log("Copied: [%s] '%s'" % (bp.name, op.join(self.collect.app.static_url_path, destination)))
+                self.log("Copied: [%s] '%s'" % (bp.name,
+                                                op.join(self.collect.app.static_url_path, destination)))
