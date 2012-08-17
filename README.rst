@@ -18,7 +18,8 @@ to specific folder (saves related paths).
 Requirements
 =============
 
-- python (2.5, 2.6, 2.7)
+- python 2.5 (importlib)
+- python 2.6
 - Flask >= 0.8
 
 

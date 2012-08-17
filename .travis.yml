@@ -1,7 +1,6 @@
 language: python
 
 python:
-    - "2.5"
     - "2.6"
     - "2.7"
 
@@ -11,7 +10,6 @@ branches:
         - develop
 
 install:
-    - "if [[ $TRAVIS_PYTHON_VERSION == '2.5' ]]; then pip install importlib; fi"
     - "if [[ $TRAVIS_PYTHON_VERSION == '2.6' ]]; then pip install importlib; fi"
     - pip install -IM pylama
 
