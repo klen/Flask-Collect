@@ -8,6 +8,12 @@ collect them in one command.
 This extension checks application blueprints for static files and copy it
 to specific folder (saves related paths).
 
+.. image:: https://secure.travis-ci.org/klen/Flask-Collect.png?branch=develop
+    :target: http://travis-ci.org/klen/Flask-Collect
+    :alt: Build Status
+
+.. content::
+
 
 Requirements
 =============
