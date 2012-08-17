@@ -12,7 +12,7 @@ to specific folder (saves related paths).
 Requirements
 =============
 
-- python >= 2.5
+- python (2.5, 2.6, 2.7)
 - Flask >= 0.8
 
 
