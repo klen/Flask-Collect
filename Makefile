@@ -14,7 +14,7 @@ clean:
 	python setup.py register
 
 .PHONY: upload
-upload: doc
+upload:
 	python setup.py sdist upload || echo 'Upload already'
 
 .PHONY: test
