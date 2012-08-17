@@ -12,7 +12,7 @@ to specific folder (saves related paths).
     :target: http://travis-ci.org/klen/Flask-Collect
     :alt: Build Status
 
-.. content::
+.. contents::
 
 
 Requirements
