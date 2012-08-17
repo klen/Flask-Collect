@@ -1,5 +1,6 @@
 #!/usr/bin/env python
 import os
+from sys import version_info
 
 from setuptools import setup, find_packages
 
@@ -11,6 +12,11 @@ def read(fname):
         return open(os.path.join(os.path.dirname(__file__), fname)).read()
     except IOError:
         return ''
+
+
+install_requires = ['Flask>=0.8']
+if version_info < (2, 7):
+    install_requires.append('importlib')
 
 
 META_DATA = dict(
@@ -26,7 +32,7 @@ META_DATA = dict(
     url=' http://github.com/klen/Flask-Collect',
 
     packages=find_packages(),
-    install_requires = ('Flask>=0.8',),
+    install_requires = install_requires,
     test_suite = 'tests',
 )
 
