@@ -10,31 +10,26 @@ clean:
 	find . -name "*.pyc" -delete
 	find . -name "*.orig" -delete
 
-.PHONY: install
-install: remove _install clean
-
 .PHONY: register
-register: _register clean
-
-.PHONY: upload
-upload: _upload install
-
-.PHONY: _upload
-_upload:
-	python setup.py sdist upload || echo 'Upload already'
-
-.PHONY: _register
-_register:
 	python setup.py register
 
-.PHONY: remove
-remove:
-	sudo pip uninstall -y $(MODULE) || echo "not installed"
-
-.PHONY: _install
-_install:
-	sudo pip install -U .
+.PHONY: upload
+upload: doc
+	python setup.py sdist upload || echo 'Upload already'
 
 .PHONY: test
-test:
+test: audit
 	python setup.py test
+
+.PHONY: audit
+audit:
+	pylama $(MODULE) -i E501
+
+.PHONY: doc
+doc:
+	python setup.py build_sphinx --source-dir=docs/ --build-dir=docs/_build --all-files
+	python setup.py upload_sphinx --upload-dir=docs/_build/html
+
+.PHONY: pep8
+pep8:
+	find $(MODULE) -name "*.py" | xargs -n 1 autopep8 -i
