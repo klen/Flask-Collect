@@ -23,5 +23,5 @@ class BaseTest(TestCase):
         collect = Collect(app)
         collect.collect(verbose=True)
 
-        assert op.exists(op.join(static_root, 'test1', 'test.css'))
-        assert op.exists(op.join(static_root, 'js', 'test.js'))
+        self.assertTrue(op.exists(op.join(static_root, 'test1', 'test.css')))
+        self.assertTrue(op.exists(op.join(static_root, 'js', 'test.js')))

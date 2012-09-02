@@ -26,7 +26,9 @@ class Collect():
 
     def __init__(self, app=None):
         self.static_root = None
+        self.static_url = None
         self.storage = None
+        self.blueprints = None
         if app:
             self.init_app(app)
 
@@ -45,8 +47,13 @@ class Collect():
 
         self.static_root = app.config.get('COLLECT_STATIC_ROOT',
                                           op.join(app.root_path, 'static')).rstrip('/')
+        self.static_url = app.static_url_path
+
         self.storage = app.config.get(
             'COLLECT_STORAGE', 'flask.ext.collect.storage.file')
+
+        # Save link on blueprints
+        self.blueprints = app.blueprints
 
     def init_script(self, manager):
         """This callback can be used to initialize collect scripts with
@@ -68,11 +75,12 @@ class Collect():
         .. _Flask-Script: http://packages.python.org/Flask-Script/
 
         """
-        @manager.command
         def collect(verbose=True):
             " Collect static from blueprints. "
+
             self.collect(verbose=verbose)
-        assert collect
+
+        manager.command(collect)
 
     def collect(self, verbose=False):
         """Collect static files from blueprints.
