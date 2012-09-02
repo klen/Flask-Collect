@@ -14,7 +14,7 @@ clean:
 	python setup.py register
 
 .PHONY: upload
-upload: doc
+upload:
 	python setup.py sdist upload || echo 'Upload already'
 
 .PHONY: test
@@ -25,8 +25,8 @@ test: audit
 audit:
 	pylama $(MODULE) -i E501
 
-.PHONY: doc
-doc:
+.PHONY: docs
+docs:
 	python setup.py build_sphinx --source-dir=docs/ --build-dir=docs/_build --all-files
 	python setup.py upload_sphinx --upload-dir=docs/_build/html
 

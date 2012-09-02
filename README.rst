@@ -12,14 +12,14 @@ to specific folder (saves related paths).
     :target: http://travis-ci.org/klen/Flask-Collect
     :alt: Build Status
 
-.. content::
+.. contents::
 
 
 Requirements
 =============
 
-- python 2.5 (importlib)
-- python 2.6
+- python 2.6 (importlib)
+- python 2.7
 - Flask >= 0.8
 
 
@@ -85,7 +85,7 @@ at https://github.com/klen/Flask-Collect/issues
 Contributing
 ============
 
-Development of adrest happens at github: https://github.com/klen/Flask-Collect
+Development of flask-collect happens at github: https://github.com/klen/Flask-Collect
 
 
 Contributors
@@ -97,8 +97,8 @@ Contributors
 License
 =======
 
-Licensed under a `GNU lesser general public license`_.
+Licensed under a `BSD license`_.
 
 
-.. _GNU lesser general public license: http://www.gnu.org/copyleft/lesser.html
+.. _BSD license: http://www.linfo.org/bsdlicense.html
 .. _klen: http://klen.github.com/

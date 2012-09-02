@@ -1,9 +1,10 @@
 #!/usr/bin/env python
 import os
+from sys import version_info
 
 from setuptools import setup, find_packages
 
-from flask_collect import version, project, license
+from flask_collect import __version__, __project__, __license__
 
 
 def read(fname):
@@ -13,10 +14,15 @@ def read(fname):
         return ''
 
 
+install_requires = ['Flask>=0.8']
+if version_info < (2, 7):
+    install_requires.append('importlib')
+
+
 META_DATA = dict(
-    name=project,
-    version=version,
-    license=license,
+    name=__project__,
+    version=__version__,
+    license=__license__,
     description=read('DESCRIPTION'),
     long_description=read('README.rst'),
     platforms=('Any'),
@@ -26,7 +32,7 @@ META_DATA = dict(
     url=' http://github.com/klen/Flask-Collect',
 
     packages=find_packages(),
-    install_requires = ('Flask>=0.8',),
+    install_requires = install_requires,
     test_suite = 'tests',
 )
 
