@@ -4,7 +4,7 @@ from sys import version_info
 
 from setuptools import setup, find_packages
 
-from flask_collect import version, project, license
+from flask_collect import __version__, __project__, __license__
 
 
 def read(fname):
@@ -20,9 +20,9 @@ if version_info < (2, 7):
 
 
 META_DATA = dict(
-    name=project,
-    version=version,
-    license=license,
+    name=__project__,
+    version=__version__,
+    license=__license__,
     description=read('DESCRIPTION'),
     long_description=read('README.rst'),
     platforms=('Any'),
