@@ -16,7 +16,7 @@ from .collect import Collect
 
 assert Collect
 
-__version__ = '0.1.4'
+__version__ = '0.1.5'
 __project__ = __name__
 __author__ = "Kirill Klenov <horneds@gmail.com>"
 __license__ = "BSD"
