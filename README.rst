@@ -16,7 +16,7 @@ to specific folder (saves related paths).
     :target: http://travis-ci.org/klen/Flask-Collect
     :alt: Build Status
 
-.. image:: https://coveralls.io/repos/klen/Flask-Collect.png?branch=develop
+.. image:: https://coveralls.io/repos/klen/Flask-Collect/badge.png?branch=develop
     :target: https://coveralls.io/r/klen/Flask-Collect
     :alt: Coverals
 
@@ -34,7 +34,7 @@ to specific folder (saves related paths).
 
 
 .. _documentation:
-.
+
 
 **Docs are available at https://flask-collect.readthedocs.org/. Pull requests with documentation enhancements and/or fixes are awesome and most welcome.**
 
