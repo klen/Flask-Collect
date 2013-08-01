@@ -36,7 +36,7 @@ to specific folder (saves related paths).
 .. _documentation:
 
 
-**Docs are available at https://flask-collect.readthedocs.org/. Pull requests with documentation enhancements and/or fixes are awesome and most welcome.**
+**Docs are available at** http://flask-collect.readthedocs.org/. **Pull requests with documentation enhancements and/or fixes are awesome and most welcome.**
 
 
 .. _contents:
