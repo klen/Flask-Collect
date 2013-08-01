@@ -1,0 +1,5 @@
+[report]
+source=flask_collect
+
+[run]
+source=flask_collect

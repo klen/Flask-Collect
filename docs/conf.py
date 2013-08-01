@@ -1,16 +1,18 @@
 # -*- coding: utf-8 -*-
 import os
 import sys
+import datetime
 
 from flask_collect import __version__ as release
 
-sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
+sys.path.insert(0, os.path.abspath(
+    os.path.join(os.path.dirname(__file__), '..')))
 extensions = ['sphinx.ext.autodoc', 'sphinx.ext.intersphinx']
 templates_path = ['_templates']
 source_suffix = '.rst'
 master_doc = 'index'
 project = u'Flask-Collect'
-copyright = u'2012, Kirill Klenov'
+copyright = u'%s, Kirill Klenov' % datetime.datetime.now().year
 version = '.'.join(release.split('.')[:2])
 exclude_patterns = ['_build']
 html_use_modindex = False

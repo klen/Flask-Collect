@@ -78,7 +78,7 @@ class Collect():
         def collect(verbose=True):
             " Collect static from blueprints. "
 
-            self.collect(verbose=verbose)
+            return self.collect(verbose=verbose)
 
         manager.command(collect)
 
@@ -91,4 +91,4 @@ class Collect():
         mod = import_module(self.storage)
         cls = getattr(mod, 'Storage')
         storage = cls(self, verbose=verbose)
-        storage.run()
+        return storage.run()
