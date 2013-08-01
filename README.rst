@@ -16,7 +16,7 @@ to specific folder (saves related paths).
     :target: http://travis-ci.org/klen/Flask-Collect
     :alt: Build Status
 
-.. image:: https://coveralls.io/repos/klen/Flask-Collect.png?branch=develop
+.. image:: https://coveralls.io/repos/klen/Flask-Collect/badge.png?branch=develop
     :target: https://coveralls.io/r/klen/Flask-Collect
     :alt: Coverals
 
