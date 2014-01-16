@@ -18,13 +18,15 @@ class BaseStorage():
         :return generator: Walk files
 
         """
-        for bp in self.collect.blueprints.values():
-            if bp.static_folder and op.isdir(bp.static_folder):
+        for bp in [self.collect.app] + list(self.collect.blueprints.values()):
+            if bp.has_static_folder and op.isdir(bp.static_folder):
                 for root, _, files in walk(bp.static_folder):
                     for f in files:
                         fpath = op.join(root, f)
                         opath = op.relpath(fpath, bp.static_folder.rstrip('/'))
-                        if bp.static_url_path and bp.static_url_path.startswith(op.join(self.collect.static_url, '')): # noqa
+                        if bp.static_url_path and self.collect.static_url and \
+                                bp.static_url_path.startswith(
+                                    op.join(self.collect.static_url, '')): # noqa
                             opath = op.join(
                                 op.relpath(
                                     bp.static_url_path,
