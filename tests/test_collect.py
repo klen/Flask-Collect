@@ -28,6 +28,7 @@ class BaseTest(TestCase):
 
         self.assertTrue(op.exists(op.join(static_root, 'test1', 'test.css')))
         self.assertTrue(op.exists(op.join(static_root, 'js', 'test.js')))
+        self.assertTrue(op.exists(op.join(static_root, 'app.css')))
 
         app.config['COLLECT_STORAGE'] = 'flask.ext.collect.storage.test'
         collect = Collect(app)
