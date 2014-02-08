@@ -45,6 +45,7 @@ class Collect():
             app.extensions = dict()
         app.extensions['collect'] = self
 
+        self.app = app
         self.static_root = app.config.get('COLLECT_STATIC_ROOT',
                                           op.join(app.root_path, 'static')).rstrip('/')
         self.static_url = app.static_url_path
