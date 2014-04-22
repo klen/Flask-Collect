@@ -18,4 +18,4 @@ from .collect import Collect
 __author__ = "Kirill Klenov <horneds@gmail.com>"
 __license__ = "BSD"
 __project__ = __name__
-__version__ = "0.2.2"
+__version__ = "0.2.3"
