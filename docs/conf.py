@@ -1,10 +1,18 @@
 # -*- coding: utf-8 -*-
 import os
+import re
 import sys
 import datetime
 
-from flask_collect import __version__ as release
+# Get the version string.  Cannot be done with import!
+with open(os.path.join('..', 'flask_collect', 'version.py'), 'rt') as f:
+    version = re.search(
+        '__version__\s*=\s*"(?P<version>.*)"\n',
+        f.read()
+    ).group('version')
 
+# The full version, including alpha/beta/rc tags.
+release = version
 sys.path.insert(0, os.path.abspath(
     os.path.join(os.path.dirname(__file__), '..')))
 extensions = ['sphinx.ext.autodoc', 'sphinx.ext.intersphinx']
@@ -13,7 +21,6 @@ source_suffix = '.rst'
 master_doc = 'index'
 project = u'Flask-Collect'
 copyright = u'%s, Kirill Klenov' % datetime.datetime.now().year
-version = '.'.join(release.split('.')[:2])
 exclude_patterns = ['_build']
 html_use_modindex = False
 html_show_sphinx = False

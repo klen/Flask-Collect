@@ -7,13 +7,25 @@ Flask-Collect
 Setup module.
 
 """
+import os
+import re
+
 from os import path
 from sys import version_info
 
 from setuptools import setup, find_packages
 
-from flask_collect import __version__, __license__
-
+# Get the version string.  Cannot be done with import!
+with open(os.path.join('flask_collect', 'version.py'), 'rt') as f:
+    data = f.read()
+    __version__ = re.search(
+        '__version__\s*=\s*"(?P<version>.*)"\n',
+        data
+    ).group('version')
+    __license__ = re.search(
+        '__license__\s*=\s*"(?P<license>.*)"\n',
+        data
+    ).group('license')
 
 def read(fname):
     try:
