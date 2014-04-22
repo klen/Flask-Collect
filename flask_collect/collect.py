@@ -4,9 +4,9 @@ from importlib import import_module
 from os import path as op
 
 
-class Collect():
-    """This class is used for integration to one or more Flask
-    applications.
+class Collect:
+
+    """This class is used for integration to one or more Flask applications.
 
     :param app: Flask application
 
@@ -46,8 +46,11 @@ class Collect():
         app.extensions['collect'] = self
 
         self.app = app
-        self.static_root = app.config.get('COLLECT_STATIC_ROOT',
-                                          op.join(app.root_path, 'static')).rstrip('/')
+        self.static_root = app.config.get(
+            'COLLECT_STATIC_ROOT',
+            op.join(
+                app.root_path,
+                'static')).rstrip('/')
         self.static_url = app.static_url_path
 
         self.storage = app.config.get(
@@ -77,8 +80,7 @@ class Collect():
 
         """
         def collect(verbose=True):
-            " Collect static from blueprints. "
-
+            """ Collect static from blueprints. """
             return self.collect(verbose=verbose)
 
         manager.command(collect)

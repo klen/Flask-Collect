@@ -14,7 +14,13 @@ class Storage(BaseStorage):
             if not op.exists(destination_dir):
                 makedirs(destination_dir)
 
-            if not op.exists(destination) or op.getmtime(destination) < op.getmtime(f):
+            if (
+                not op.exists(destination)
+                    or op.getmtime(destination) < op.getmtime(f)):
                 copy2(f, destination)
-                self.log("Copied: [%s] '%s'" % (bp.name,
-                                                op.join(self.collect.static_url, destination)))
+                self.log(
+                    "Copied: [%s] '%s'" %
+                    (bp.name,
+                     op.join(
+                         self.collect.static_url,
+                         destination)))
