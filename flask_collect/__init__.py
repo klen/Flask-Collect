@@ -14,9 +14,8 @@
 """
 
 from .collect import Collect
-from .version import __version__, __license__
 
-assert Collect
-
-__project__ = __name__
 __author__ = "Kirill Klenov <horneds@gmail.com>"
+__license__ = "BSD"
+__project__ = __name__
+__version__ = "0.2.2"
