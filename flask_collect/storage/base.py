@@ -18,7 +18,9 @@ class BaseStorage():
         :return generator: Walk files
 
         """
-        for bp in [self.collect.app] + list(self.collect.blueprints.values()):
+        app_and_blueprints = self.collect.filter(
+            [self.collect.app] + list(self.collect.blueprints.values()))
+        for bp in app_and_blueprints:
             if bp.has_static_folder and op.isdir(bp.static_folder):
                 for root, _, files in walk(bp.static_folder):
                     for f in files:

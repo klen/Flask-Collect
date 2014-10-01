@@ -20,4 +20,9 @@ A list of configuration keys currently understood by the extension:
 
 ``COLLECT_STORAGE``             Import path to storage backend.
                                 By default: *flask.ext.collect.storage.file*.
+
+``COLLECT_FILTER``              Import path to filter function that can
+                                manipulate blueprints before iterating in
+                                :meth:`~flask_collect.storage.base.StorageBase`.
+                                By default: *flask.ext.collect.storage.file*.
 =============================== =========================================

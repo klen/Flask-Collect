@@ -5,7 +5,7 @@ import sys
 import datetime
 
 # Get the version string.  Cannot be done with import!
-with open(os.path.join('..', 'flask_collect', 'version.py'), 'rt') as f:
+with open(os.path.join('..', 'flask_collect', '__init__.py'), 'rt') as f:
     version = re.search(
         '__version__\s*=\s*"(?P<version>.*)"\n',
         f.read()
