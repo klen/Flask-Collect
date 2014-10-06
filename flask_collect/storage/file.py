@@ -1,5 +1,5 @@
 from os import path as op, makedirs
-from shutil import copy2
+from shutil import copy
 
 from .base import BaseStorage
 
@@ -17,7 +17,7 @@ class Storage(BaseStorage):
             if (
                 not op.exists(destination)
                     or op.getmtime(destination) < op.getmtime(f)):
-                copy2(f, destination)
+                copy(f, destination)
                 self.log(
                     "Copied: [%s] '%s'" %
                     (bp.name,
