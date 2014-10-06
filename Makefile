@@ -77,3 +77,7 @@ minor: release
 .PHONY: patch
 patch:
 	make release VERSION=patch
+
+.PHONY: major
+major:
+	make release VERSION=major

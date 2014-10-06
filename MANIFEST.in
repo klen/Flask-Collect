@@ -1,5 +1,6 @@
 include LICENSE
 include MANIFEST.in
+include CONTRIBUTORS.rst
 include README.rst
 include requirements.txt
 
