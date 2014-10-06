@@ -18,4 +18,4 @@ from .collect import Collect # noqa
 __author__ = "Kirill Klenov <horneds@gmail.com>"
 __license__ = "BSD"
 __project__ = __name__
-__version__ = "1.0.1"
+__version__ = "1.0.2"
