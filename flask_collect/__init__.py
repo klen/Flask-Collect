@@ -13,7 +13,7 @@
 
 """
 
-from .collect import Collect
+from .collect import Collect # noqa
 
 __author__ = "Kirill Klenov <horneds@gmail.com>"
 __license__ = "BSD"
