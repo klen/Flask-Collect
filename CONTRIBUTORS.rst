@@ -1,0 +1,5 @@
+* Javier Martin Montull (https://github.com/jmartinm)
+* Jiri Kuncar (https://github.com/jirikuncar)
+* John Begeman (https://github.com/jawnb)
+* Philippe Ombredanne (https://github.com/pombredanne)
+* Yoan Blanc (https://github.com/greut)

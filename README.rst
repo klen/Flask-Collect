@@ -122,6 +122,13 @@ at https://github.com/klen/Flask-Collect/issues
 
 .. _contributing:
 
+Contributors
+============
+
+Maintainer: Kirill Klenov (horneds@gmail.com)
+
+Also see the `CONTRIBUTORS.rst` file.
+
 Contributing
 ============
 
