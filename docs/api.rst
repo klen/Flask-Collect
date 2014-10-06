@@ -12,3 +12,10 @@ Configuration
 
 .. autoclass:: Collect
    :members:
+
+
+Storage
+```````
+
+.. autoclass:: flask.ext.collect.storage.base.BaseStorage
+   :members:

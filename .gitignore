@@ -1,5 +1,7 @@
 *.egg-info
-.ropeproject
 *.pyc
-dist
+.coverage
+.ropeproject
+.tox
 _build
+dist

@@ -1,6 +1,7 @@
 # coding: utf-8
 
-from importlib import import_module
+from flask._compat import string_types
+from werkzeug.utils import import_string
 from os import path as op
 
 
@@ -28,6 +29,7 @@ class Collect:
         self.static_root = None
         self.static_url = None
         self.storage = None
+        self.filter = None
         self.blueprints = None
         if app:
             self.init_app(app)
@@ -55,6 +57,11 @@ class Collect:
 
         self.storage = app.config.get(
             'COLLECT_STORAGE', 'flask.ext.collect.storage.file')
+
+        filter_ = app.config.get('COLLECT_FILTER')
+        if filter_ is not None and isinstance(filter_, string_types):
+            filter_ = import_string(filter_)
+        self.filter = filter_ if filter_ is not None else list
 
         # Save link on blueprints
         self.blueprints = app.blueprints
@@ -91,7 +98,7 @@ class Collect:
         :param verbose: Show debug information.
 
         """
-        mod = import_module(self.storage)
+        mod = import_string(self.storage)
         cls = getattr(mod, 'Storage')
         storage = cls(self, verbose=verbose)
         return storage.run()

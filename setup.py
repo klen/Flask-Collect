@@ -29,9 +29,6 @@ install_requires = [
     l for l in _read('requirements.txt').split('\n')
     if l and not l.startswith('#')]
 
-if version_info < (2, 7):
-    install_requires.append('importlib')
-
 
 META_DATA = dict(
     name='Flask-Collect',
