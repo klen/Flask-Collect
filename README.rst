@@ -3,12 +3,11 @@ Flask-Collect
 
 .. _description:
 
-Flack-Collect is simply application for collect static files in Flask project.
-Serve static files with Flask -- bad idea for production, with this you will can
-collect them in one command.
+**Flask-Collect** is an extension for Flask that helps collecting static files.
 
-This extension checks application blueprints for static files and copy it
-to specific folder (saves related paths).
+Serving static files with *Flask* -- bad idea for production, this tool will
+help you collect them in one command. It checks application and blueprints for
+static files and copy them to specific folder (saves related paths).
 
 .. _badges:
 

@@ -28,7 +28,7 @@ register:
 
 .PHONY: upload
 # target: upload - Upload module on PyPi
-upload: clean docs
+upload: clean
 	@pip install twine wheel
 	@python setup.py sdist bdist_wheel
 	@twine upload dist/*
