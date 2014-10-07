@@ -126,7 +126,7 @@ Contributors
 
 Maintainer: Kirill Klenov (horneds@gmail.com)
 
-Also see the `CONTRIBUTORS.rst` file.
+Also see the `CONTRIBUTORS.rst <https://github.com/klen/Flask-Collect/blob/develop/CONTRIBUTORS.rst>`_ file.
 
 Contributing
 ============
