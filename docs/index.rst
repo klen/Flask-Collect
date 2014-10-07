@@ -7,6 +7,10 @@ Welcome to Flask-Collect's documentation.
 
 .. == description ==
 .. _description:
+
+Flask-Collect
+-------------
+
 .. automodule:: flask.ext.collect
 
 .. == badges ==

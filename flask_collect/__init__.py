@@ -1,19 +1,13 @@
 # -*- coding: utf-8 -*-
 """
-    Flask-Collect
-    =============
+**Flask-Collect** is an extension for Flask that helps collecting static files.
 
-    Flack-Collect is simply application for collect static files in Flask_
-    project.
-    Serve static files with Flask_ -- bad idea for production, with this you
-    will can collect them in one command.
-
-    This extension checks application blueprints for static files and copy it
-    to specific folder (saves related paths).
-
+Serving static files with *Flask* -- bad idea for production, this tool will
+help you collect them in one command. It checks application and blueprints for
+static files and copy them to specific folder (saves related paths).
 """
 
-from .collect import Collect # noqa
+from .collect import Collect  # noqa
 
 __author__ = "Kirill Klenov <horneds@gmail.com>"
 __license__ = "BSD"

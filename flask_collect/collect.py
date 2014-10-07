@@ -1,23 +1,27 @@
 # coding: utf-8
 
+"""Define *Flask* extension."""
+
 from flask._compat import string_types
 from werkzeug.utils import import_string
 from os import path as op
 
 
-class Collect:
+class Collect(object):
 
-    """This class is used for integration to one or more Flask applications.
+    """Extension object for integration to one or more Flask applications.
 
     :param app: Flask application
 
-    ::
+    .. code-block:: python
 
         app = Flask(__name__)
         collect = Collect(app)
 
     The second possibility is to create the object once and configure the
-    application later to support it::
+    application later to support it:
+
+    .. code-block:: python
 
         collect = Collect()
         ...
@@ -26,6 +30,8 @@ class Collect:
     """
 
     def __init__(self, app=None):
+        """Initilize the extension object."""
+        self.app = None
         self.static_root = None
         self.static_url = None
         self.storage = None
@@ -35,13 +41,11 @@ class Collect:
             self.init_app(app)
 
     def init_app(self, app):
-        """This callback can be used to initialize an application for the
-        use with this collect setup.
+        """Initialize an application for the use with this collect setup.
 
         See :ref:`configuration`.
 
         :param app: Flask application
-
         """
         if not hasattr(app, 'extensions'):
             app.extensions = dict()
@@ -67,12 +71,13 @@ class Collect:
         self.blueprints = app.blueprints
 
     def init_script(self, manager):
-        """This callback can be used to initialize collect scripts with
-        `Flask-Script`_ manager instance.
+        """Initialize collect scripts with `Flask-Script`_ manager instance.
 
         :param manager: `Flask-Script`_ manager
 
-        This added manager collect command: ::
+        This added manager collect command:
+
+        .. code-block:: console
 
             $ ./manage.py collect -h
             usage: ./manage.py collect [-h] [-v]
@@ -84,10 +89,9 @@ class Collect:
             -v, --verbose
 
         .. _Flask-Script: http://packages.python.org/Flask-Script/
-
         """
         def collect(verbose=True):
-            """ Collect static from blueprints. """
+            """Collect static from blueprints."""
             return self.collect(verbose=verbose)
 
         manager.command(collect)
@@ -96,7 +100,6 @@ class Collect:
         """Collect static files from blueprints.
 
         :param verbose: Show debug information.
-
         """
         mod = import_string(self.storage)
         cls = getattr(mod, 'Storage')

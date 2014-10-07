@@ -1,9 +1,29 @@
+# -*- coding: utf-8 -*-
+#
+# This file is part of Flask-Collect.
+# Copyright (C) 2012, 2013, 2014 Kirill Klenov.
+# Copyright (C) 2014 CERN.
+#
+# Flask-Collect is free software; you can redistribute it and/or modify it
+# under the terms of the Revised BSD License; see LICENSE file for
+# more details.
+
 from flask import Flask, Blueprint
 from flask_collect import Collect
 from functools import partial
-from os import path as op
+from os import path as op, remove
+from shutil import rmtree, copy
 from tempfile import mkdtemp
 from unittest import TestCase
+
+
+def filter_(order, items):
+    """Filter application blueprints."""
+    def _key(item):
+        if item.name in order:
+            return order.index(item.name)
+        return -1
+    return sorted(items, key=_key)
 
 
 class BaseTest(TestCase):
@@ -35,7 +55,10 @@ class BaseTest(TestCase):
         test = collect.collect(verbose=True)
         self.assertEqual(len(test), 3)
 
+        rmtree(static_root)
+
     def test_filter(self):
+        """Test blueprint filter."""
         app = Flask(__name__)
 
         blueprint = Blueprint('test1', __name__, static_folder='static1')
@@ -45,13 +68,6 @@ class BaseTest(TestCase):
         app.register_blueprint(blueprint)
 
         static_root = mkdtemp()
-
-        def filter_(order, items):
-            def _key(item):
-                if item.name in order:
-                    return order.index(item.name)
-                return -1
-            return sorted(items, key=_key)
 
         app.config['COLLECT_STATIC_ROOT'] = static_root
         app.config['COLLECT_FILTER'] = partial(filter_, ['test3', 'test1'])
@@ -66,3 +82,86 @@ class BaseTest(TestCase):
         collect = Collect(app)
         test = list(collect.collect(verbose=True))
         self.assertTrue('static1' in test[1][1])
+
+        rmtree(static_root)
+
+    def test_file_storage(self):
+        """Test file storage."""
+        app = Flask(__name__)
+
+        blueprint = Blueprint('test1', __name__, static_folder='static1')
+        app.register_blueprint(blueprint)
+
+        blueprint = Blueprint('test3', __name__, static_folder='static3')
+        app.register_blueprint(blueprint)
+
+        static_root = mkdtemp()
+
+        app.config['COLLECT_STATIC_ROOT'] = static_root
+        app.config['COLLECT_FILTER'] = partial(filter_, ['test3', 'test1'])
+        app.config['COLLECT_STORAGE'] = 'flask.ext.collect.storage.file'
+
+        collect = Collect(app)
+        collect.collect()
+
+        with open(op.join(static_root, 'test.css'), 'r') as file_:
+            self.assertTrue('body { color: red; }' in file_.read())
+
+        rmtree(static_root)
+
+    def test_link_storage(self):
+        """Test file storage."""
+        dummy_app = Flask(__name__)
+
+        test_static3 = mkdtemp()
+        dummy_bp = Blueprint('dummy', __name__, static_folder='static3')
+        dummy_app.register_blueprint(dummy_bp)
+
+        dummy_app.config['COLLECT_STATIC_ROOT'] = test_static3
+        dummy_app.config['COLLECT_STORAGE'] = 'flask.ext.collect.storage.file'
+
+        dummy_collect = Collect(dummy_app)
+        dummy_collect.collect()
+
+        with open(op.join(test_static3, 'test.css'), 'r') as file_:
+            self.assertTrue('body { color: red; }' in file_.read())
+
+        app = Flask(__name__)
+
+        blueprint = Blueprint('test1', __name__, static_folder='static1')
+        app.register_blueprint(blueprint)
+
+        blueprint = Blueprint('test2', __name__, static_folder='static2')
+        app.register_blueprint(blueprint)
+
+        blueprint = Blueprint('test3', __name__, static_folder=test_static3)
+        app.register_blueprint(blueprint)
+
+        static_root = mkdtemp()
+
+        app.config['COLLECT_STATIC_ROOT'] = static_root
+        app.config['COLLECT_FILTER'] = partial(filter_, ['test3', 'test1'])
+        app.config['COLLECT_STORAGE'] = 'flask.ext.collect.storage.link'
+
+        collect = Collect(app)
+        collect.collect()
+
+        with open(op.join(static_root, 'test.css'), 'r') as file_:
+            self.assertTrue('body { color: red; }' in file_.read())
+
+        with open(op.join(test_static3, 'test.css'), 'w') as file_:
+            file_.write('body { color: green; }')
+
+        with open(op.join(static_root, 'test.css'), 'r') as file_:
+            self.assertTrue('body { color: green; }' in file_.read())
+
+        # remove custom test.css and re-collect files
+        remove(op.join(test_static3, 'test.css'))
+        collect.collect()
+
+        with open(op.join(static_root, 'test.css'), 'r') as file_:
+            # we get the file content from test1
+            self.assertTrue('body { color: blue; }' in file_.read())
+
+        rmtree(test_static3)
+        rmtree(static_root)
