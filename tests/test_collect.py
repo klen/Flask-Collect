@@ -8,6 +8,9 @@
 # under the terms of the Revised BSD License; see LICENSE file for
 # more details.
 
+import subprocess
+import time
+
 from flask import Flask, Blueprint
 from flask_collect import Collect
 from functools import partial
@@ -107,6 +110,53 @@ class BaseTest(TestCase):
         with open(op.join(static_root, 'test.css'), 'r') as file_:
             self.assertTrue('body { color: red; }' in file_.read())
 
+        rmtree(static_root)
+
+    def test_file_storage_update(self):
+        """Test file storage."""
+        dummy_app = Flask(__name__)
+
+        test_static3 = mkdtemp()
+        dummy_bp = Blueprint('dummy', __name__, static_folder='static3')
+        dummy_app.register_blueprint(dummy_bp)
+
+        dummy_app.config['COLLECT_STATIC_ROOT'] = test_static3
+        dummy_app.config['COLLECT_STORAGE'] = 'flask.ext.collect.storage.file'
+
+        dummy_collect = Collect(dummy_app)
+        dummy_collect.collect()
+
+        app = Flask(__name__)
+
+        blueprint = Blueprint('test1', __name__, static_folder='static1')
+        app.register_blueprint(blueprint)
+
+        blueprint = Blueprint('test3', __name__, static_folder=test_static3)
+        app.register_blueprint(blueprint)
+
+        static_root = mkdtemp()
+
+        app.config['COLLECT_STATIC_ROOT'] = static_root
+        app.config['COLLECT_FILTER'] = partial(filter_, ['test1', 'test3'])
+        app.config['COLLECT_STORAGE'] = 'flask.ext.collect.storage.file'
+
+        collect = Collect(app)
+        collect.collect()
+
+        with open(op.join(static_root, 'test.css'), 'r') as file_:
+            self.assertTrue('body { color: blue; }' in file_.read())
+
+        time.sleep(1)
+        subprocess.call(['touch', op.join(test_static3, 'test.css')])
+
+        # re-collect files
+        collect.collect()
+
+        # check that test3 was not added because it's newer
+        with open(op.join(static_root, 'test.css'), 'r') as file_:
+            self.assertTrue('body { color: blue; }' in file_.read())
+
+        rmtree(test_static3)
         rmtree(static_root)
 
     def test_link_storage(self):
