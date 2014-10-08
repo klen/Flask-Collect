@@ -38,4 +38,6 @@ class Storage(BaseStorage):
                     "Copied: [%s] '%s'" % (
                         bp.name,
                         op.join(self.collect.static_url, destination)))
-                destination_list.add(destination)
+            # Always add destination to avoid overwrites by newer version
+            # from next blueprint with same file.
+            destination_list.add(destination)
