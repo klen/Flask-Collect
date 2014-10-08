@@ -33,13 +33,15 @@ class Storage(BaseStorage):
         for bp, f, o in self:
             destination = os.path.join(self.collect.static_root, o)
             destination_dir = os.path.dirname(destination)
+            normalized_source = os.path.realpath(f)
             if not os.path.exists(destination_dir):
                 os.makedirs(destination_dir)
 
             if destination in destination_list:
                 self.log("{0} already linked".format(destination))
                 skipped += 1
-            elif not os.path.exists(destination):
+            elif not os.path.exists(destination) or \
+                    normalized_source != os.path.realpath(destination):
                 # the path is a link, but points to invalid location
                 if os.path.islink(destination):
                     os.remove(destination)
