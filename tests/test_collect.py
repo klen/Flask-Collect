@@ -215,3 +215,37 @@ class BaseTest(TestCase):
 
         rmtree(test_static3)
         rmtree(static_root)
+
+    def test_link_storage_update(self):
+        """Test link storage update."""
+        app = Flask(__name__)
+
+        blueprint = Blueprint('test1', __name__, static_folder='static1')
+        app.register_blueprint(blueprint)
+
+        static_root = mkdtemp()
+
+        app.config['COLLECT_STATIC_ROOT'] = static_root
+        app.config['COLLECT_FILTER'] = partial(filter_, ['test1'])
+        app.config['COLLECT_STORAGE'] = 'flask.ext.collect.storage.link'
+
+        collect = Collect(app)
+        collect.collect()
+
+        # Make sure a new link has been created pointing to test1
+        with open(op.join(static_root, 'test.css'), 'r') as file_:
+            self.assertTrue('body { color: blue; }' in file_.read())
+
+
+        blueprint = Blueprint('test3', __name__, static_folder='static3')
+        app.register_blueprint(blueprint)
+
+        app.config['COLLECT_FILTER'] = partial(filter_, ['test3', 'test1'])
+        collect = Collect(app)
+        collect.collect()
+
+        # Make sure a new link has been created pointing to test3
+        with open(op.join(static_root, 'test.css'), 'r') as file_:
+            self.assertTrue('body { color: red; }' in file_.read())
+
+        rmtree(static_root)
