@@ -10,7 +10,7 @@
 
 """Copy files from all static folders to root folder."""
 
-from os import path as op, makedirs
+from os import path as op, makedirs, remove
 from shutil import copy
 
 from .base import BaseStorage
@@ -33,6 +33,8 @@ class Storage(BaseStorage):
                 self.log("{0} already copied".format(destination))
             elif not op.exists(destination) or \
                     op.getmtime(destination) < op.getmtime(f):
+                if op.exists(destination):
+                    remove(destination)
                 copy(f, destination)
                 self.log(
                     "Copied: [%s] '%s'" % (
