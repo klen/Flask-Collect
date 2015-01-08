@@ -11,12 +11,12 @@ static files and copy them to specific folder (saves related paths).
 
 .. _badges:
 
-.. image:: http://img.shields.io/travis/klen/flask-collect.svg?style=flat-square
-    :target: http://travis-ci.org/klen/flask-collect
+.. image:: http://img.shields.io/travis/klen/Flask-Collect.svg?style=flat-square
+    :target: http://travis-ci.org/klen/Flask-Collect
     :alt: Build Status
 
-.. image:: http://img.shields.io/coveralls/klen/flask-collect.svg?style=flat-square
-    :target: https://coveralls.io/r/klen/flask-collect
+.. image:: http://img.shields.io/coveralls/klen/Flask-Collect.svg?style=flat-square
+    :target: https://coveralls.io/r/klen/Flask-Collect
     :alt: Coverals
 
 .. image:: http://img.shields.io/pypi/v/flask-collect.svg?style=flat-square
@@ -26,10 +26,6 @@ static files and copy them to specific folder (saves related paths).
 .. image:: http://img.shields.io/pypi/dm/flask-collect.svg?style=flat-square
     :target: https://pypi.python.org/pypi/flask-collect
     :alt: Downloads
-
-.. image:: http://img.shields.io/pypi/l/flask-collect.svg?style=flat-square
-    :target: https://pypi.python.org/pypi/flask-collect
-    :alt: License
 
 .. image:: http://img.shields.io/gratipay/klen.svg?style=flat-square
     :target: https://www.gratipay.com/klen/
