@@ -3,8 +3,8 @@
 Configuration
 =============
 
-The following configuration values exist for Flask-SQLAlchemy.
-Flask-SQLAlchemy loads these values from your main Flask config which can
+The following configuration values exist for Flask-Collect.
+Flask-Collect loads these values from your main Flask config which can
 be populated in various ways.  Note that some of those cannot be modified
 after the engine was created so make sure to configure as early as
 possible and to not modify them at runtime.
@@ -24,5 +24,5 @@ A list of configuration keys currently understood by the extension:
 ``COLLECT_FILTER``              Import path to filter function that can
                                 manipulate blueprints before iterating in
                                 :meth:`~flask_collect.storage.base.StorageBase`.
-                                By default: *flask.ext.collect.storage.file*.
+                                By default: *None*.
 =============================== =========================================
