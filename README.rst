@@ -11,24 +11,28 @@ static files and copy them to specific folder (saves related paths).
 
 .. _badges:
 
-.. image:: https://secure.travis-ci.org/klen/Flask-Collect.png?branch=develop
-    :target: http://travis-ci.org/klen/Flask-Collect
+.. image:: http://img.shields.io/travis/klen/flask-collect.svg?style=flat-square
+    :target: http://travis-ci.org/klen/flask-collect
     :alt: Build Status
 
-.. image:: https://coveralls.io/repos/klen/Flask-Collect/badge.png?branch=develop
-    :target: https://coveralls.io/r/klen/Flask-Collect
+.. image:: http://img.shields.io/coveralls/klen/flask-collect.svg?style=flat-square
+    :target: https://coveralls.io/r/klen/flask-collect
     :alt: Coverals
 
-.. image:: https://pypip.in/v/Flask-Collect/badge.png
-    :target: https://crate.io/packages/Flask-Collect
+.. image:: http://img.shields.io/pypi/v/flask-collect.svg?style=flat-square
+    :target: https://pypi.python.org/pypi/flask-collect
     :alt: Version
 
-.. image:: https://pypip.in/d/Flask-Collect/badge.png
-    :target: https://crate.io/packages/Flask-Collect
+.. image:: http://img.shields.io/pypi/dm/flask-collect.svg?style=flat-square
+    :target: https://pypi.python.org/pypi/flask-collect
     :alt: Downloads
 
-.. image:: https://dl.dropboxusercontent.com/u/487440/reformal/donate.png
-    :target: https://www.gittip.com/klen/
+.. image:: http://img.shields.io/pypi/l/flask-collect.svg?style=flat-square
+    :target: https://pypi.python.org/pypi/flask-collect
+    :alt: License
+
+.. image:: http://img.shields.io/gratipay/klen.svg?style=flat-square
+    :target: https://www.gratipay.com/klen/
     :alt: Donate
 
 
@@ -82,7 +86,7 @@ Initialize Flask-Collect extenstion: ::
     collect = Collect()
     collect.init_app(app)
 
-If you use `Flask-Script <http://github.com/rduplain/flask-script>`_, activate Flask-Collect commands: ::
+If you use Flask-Script_, activate Flask-Collect commands: ::
 
     from flask.ext.collect import Collect
 
@@ -100,13 +104,13 @@ If you use `Flask-Script <http://github.com/rduplain/flask-script>`_, activate F
 Use Flask-Collect
 =================
 
-You can run: ::
+From any python script: ::
 
-    collect.collect(verbose=True)
+    collect.collect(remove=True, verbose=True)
 
-or with command:
+with Flask-Script_:
 
-    $ ./manage.py collect
+    $ ./manage.py collect --remove
 
 
 .. _bagtracker:
@@ -148,3 +152,4 @@ Licensed under a `BSD license`_.
 .. _klen: http://klen.github.com/
 .. _SQLAlchemy: http://www.sqlalchemy.org/
 .. _Flask: http://flask.pocoo.org/
+.. _Flask-Script: http://github.com/rduplain/flask-script

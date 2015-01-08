@@ -29,25 +29,24 @@ class Storage(BaseStorage):
         """
         self.log("Collect static from blueprints")
         skipped, total = 0, 0
-        destination_list = set()
+
         for bp, f, o in self:
             destination = os.path.join(self.collect.static_root, o)
+
             destination_dir = os.path.dirname(destination)
-            normalized_source = os.path.realpath(f)
             if not os.path.exists(destination_dir):
                 os.makedirs(destination_dir)
 
-            if destination in destination_list:
-                self.log("{0} already linked".format(destination))
-                skipped += 1
-            elif not os.path.exists(destination) or \
+            normalized_source = os.path.realpath(f)
+
+            if not os.path.exists(destination) or \
                     normalized_source != os.path.realpath(destination):
                 # the path is a link, but points to invalid location
                 if os.path.islink(destination):
                     os.remove(destination)
                 os.symlink(f, destination)
                 self.log("{0}:{1} symbolink link created".format(bp.name, o))
-                destination_list.add(destination)
+
             else:
                 skipped += 1
             total += 1

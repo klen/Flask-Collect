@@ -31,22 +31,29 @@ class BaseStorage(object):
         """
         app_and_blueprints = self.collect.filter(
             [self.collect.app] + list(self.collect.blueprints.values()))
+
+        destination_list = set()
+
         for bp in app_and_blueprints:
             if bp.has_static_folder and op.isdir(bp.static_folder):
                 for root, _, files in walk(bp.static_folder):
                     for f in files:
-                        fpath = op.join(root, f)
-                        opath = op.relpath(fpath, bp.static_folder.rstrip('/'))
+                        spath = op.join(root, f)
+                        tpath = op.relpath(spath, bp.static_folder.rstrip('/'))
                         relative = (bp.static_url_path and
                                     self.collect.static_url and
                                     bp.static_url_path.startswith(op.join(
                                         self.collect.static_url, '')))  # noqa
                         if relative:
-                            opath = op.join(
-                                op.relpath(
-                                    bp.static_url_path,
-                                    self.collect.static_url), opath)
-                        yield bp, fpath, opath
+                            tpath = op.join(
+                                op.relpath(bp.static_url_path, self.collect.static_url), tpath)
+
+                        if tpath in destination_list:
+                            self.log("{0} already sourced".format(tpath))
+                            continue
+
+                        destination_list.add(tpath)
+                        yield bp, spath, tpath
 
     def log(self, msg):
         """Log message."""

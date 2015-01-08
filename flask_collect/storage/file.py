@@ -23,23 +23,21 @@ class Storage(BaseStorage):
     def run(self):
         """Collect static files from blueprints."""
         self.log("Collect static from blueprints.")
-        destination_list = set()
+
         for bp, f, o in self:
             destination = op.join(self.collect.static_root, o)
+
             destination_dir = op.dirname(destination)
             if not op.exists(destination_dir):
                 makedirs(destination_dir)
-            if destination in destination_list:
-                self.log("{0} already copied".format(destination))
-            elif not op.exists(destination) or \
-                    op.getmtime(destination) < op.getmtime(f):
-                if op.exists(destination):
-                    remove(destination)
-                copy(f, destination)
-                self.log(
-                    "Copied: [%s] '%s'" % (
-                        bp.name,
-                        op.join(self.collect.static_url, destination)))
-            # Always add destination to avoid overwrites by newer version
-            # from next blueprint with same file.
-            destination_list.add(destination)
+
+            if op.exists(destination):
+
+                if op.getmtime(destination) >= op.getmtime(f):
+                    continue
+
+                remove(destination)
+
+            copy(f, destination)
+            self.log(
+                "Copied: [%s] '%s'" % (bp.name, op.join(self.collect.static_url, destination)))

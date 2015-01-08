@@ -7,17 +7,17 @@
 # Flask-Collect is free software; you can redistribute it and/or modify it
 # under the terms of the Revised BSD License; see LICENSE file for
 # more details.
+import time
+from os import path as op, remove
 
 import subprocess
-import time
-
 from flask import Flask, Blueprint
-from flask_collect import Collect
 from functools import partial
-from os import path as op, remove
-from shutil import rmtree, copy
+from shutil import rmtree
 from tempfile import mkdtemp
 from unittest import TestCase
+
+from flask_collect import Collect
 
 
 def filter_(order, items):
@@ -78,7 +78,7 @@ class BaseTest(TestCase):
 
         collect = Collect(app)
         test = list(collect.collect(verbose=True))
-        self.assertEqual(len(test), 3)
+        self.assertEqual(len(test), 2)
         self.assertTrue('static3' in test[1][1])
 
         app.config['COLLECT_FILTER'] = partial(filter_, ['test1', 'test3'])
@@ -235,7 +235,6 @@ class BaseTest(TestCase):
         # Make sure a new link has been created pointing to test1
         with open(op.join(static_root, 'test.css'), 'r') as file_:
             self.assertTrue('body { color: blue; }' in file_.read())
-
 
         blueprint = Blueprint('test3', __name__, static_folder='static3')
         app.register_blueprint(blueprint)
