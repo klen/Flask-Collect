@@ -53,7 +53,7 @@ class BaseTest(TestCase):
         self.assertTrue(op.exists(op.join(static_root, 'js', 'test.js')))
         self.assertTrue(op.exists(op.join(static_root, 'app.css')))
 
-        app.config['COLLECT_STORAGE'] = 'flask.ext.collect.storage.test'
+        app.config['COLLECT_STORAGE'] = 'flask_collect.storage.test'
         collect = Collect(app)
         test = collect.collect(verbose=True)
         self.assertEqual(len(test), 3)
@@ -74,7 +74,7 @@ class BaseTest(TestCase):
 
         app.config['COLLECT_STATIC_ROOT'] = static_root
         app.config['COLLECT_FILTER'] = partial(filter_, ['test3', 'test1'])
-        app.config['COLLECT_STORAGE'] = 'flask.ext.collect.storage.test'
+        app.config['COLLECT_STORAGE'] = 'flask_collect.storage.test'
 
         collect = Collect(app)
         test = list(collect.collect(verbose=True))
@@ -102,7 +102,7 @@ class BaseTest(TestCase):
 
         app.config['COLLECT_STATIC_ROOT'] = static_root
         app.config['COLLECT_FILTER'] = partial(filter_, ['test3', 'test1'])
-        app.config['COLLECT_STORAGE'] = 'flask.ext.collect.storage.file'
+        app.config['COLLECT_STORAGE'] = 'flask_collect.storage.file'
 
         collect = Collect(app)
         collect.collect()
@@ -121,7 +121,7 @@ class BaseTest(TestCase):
         dummy_app.register_blueprint(dummy_bp)
 
         dummy_app.config['COLLECT_STATIC_ROOT'] = test_static3
-        dummy_app.config['COLLECT_STORAGE'] = 'flask.ext.collect.storage.file'
+        dummy_app.config['COLLECT_STORAGE'] = 'flask_collect.storage.file'
 
         dummy_collect = Collect(dummy_app)
         dummy_collect.collect()
@@ -138,7 +138,7 @@ class BaseTest(TestCase):
 
         app.config['COLLECT_STATIC_ROOT'] = static_root
         app.config['COLLECT_FILTER'] = partial(filter_, ['test1', 'test3'])
-        app.config['COLLECT_STORAGE'] = 'flask.ext.collect.storage.file'
+        app.config['COLLECT_STORAGE'] = 'flask_collect.storage.file'
 
         collect = Collect(app)
         collect.collect()
@@ -168,7 +168,7 @@ class BaseTest(TestCase):
         dummy_app.register_blueprint(dummy_bp)
 
         dummy_app.config['COLLECT_STATIC_ROOT'] = test_static3
-        dummy_app.config['COLLECT_STORAGE'] = 'flask.ext.collect.storage.file'
+        dummy_app.config['COLLECT_STORAGE'] = 'flask_collect.storage.file'
 
         dummy_collect = Collect(dummy_app)
         dummy_collect.collect()
@@ -191,7 +191,7 @@ class BaseTest(TestCase):
 
         app.config['COLLECT_STATIC_ROOT'] = static_root
         app.config['COLLECT_FILTER'] = partial(filter_, ['test3', 'test1'])
-        app.config['COLLECT_STORAGE'] = 'flask.ext.collect.storage.link'
+        app.config['COLLECT_STORAGE'] = 'flask_collect.storage.link'
 
         collect = Collect(app)
         collect.collect()
@@ -227,7 +227,7 @@ class BaseTest(TestCase):
 
         app.config['COLLECT_STATIC_ROOT'] = static_root
         app.config['COLLECT_FILTER'] = partial(filter_, ['test1'])
-        app.config['COLLECT_STORAGE'] = 'flask.ext.collect.storage.link'
+        app.config['COLLECT_STORAGE'] = 'flask_collect.storage.link'
 
         collect = Collect(app)
         collect.collect()

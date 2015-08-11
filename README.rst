@@ -71,11 +71,11 @@ Flask-Collect settings (default values): ::
 
     # Target static dir
     COLLECT_STATIC_ROOT = <APP.ROOT_PATH>/static
-    COLLECT_STORAGE = 'flask.ext.collect.storage.file'
+    COLLECT_STORAGE = 'flask_collect.storage.file'
 
 Initialize Flask-Collect extenstion: ::
 
-    from flask.ext.collect import Collect
+    from flask_collect import Collect
     
     ...
 
@@ -84,7 +84,7 @@ Initialize Flask-Collect extenstion: ::
 
 If you use Flask-Script_, activate Flask-Collect commands: ::
 
-    from flask.ext.collect import Collect
+    from flask_collect import Collect
 
     ...
     manager = Manager()

@@ -11,7 +11,7 @@ Welcome to Flask-Collect's documentation.
 Flask-Collect
 -------------
 
-.. automodule:: flask.ext.collect
+.. automodule:: flask_collect
 
 .. == badges ==
 .. _badges:
