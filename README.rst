@@ -34,9 +34,9 @@ static files and copy them to specific folder (saves related paths).
 
 .. _documentation:
 
-
-**Docs are available at** http://flask-collect.readthedocs.org/. **Pull requests with documentation enhancements and/or fixes are awesome and most welcome.**
-
+**Docs are available at** http://flask-collect.readthedocs.org/. **Pull
+requests with documentation enhancements and/or fixes are awesome and most
+welcome.**
 
 .. _contents:
 
@@ -55,7 +55,7 @@ Requirements
 .. _installation:
 
 Installation
-=============
+============
 
 **Flask-Collect** should be installed using pip: ::
 
@@ -76,7 +76,7 @@ Flask-Collect settings (default values): ::
 Initialize Flask-Collect extenstion: ::
 
     from flask_collect import Collect
-    
+
     ...
 
     collect = Collect()
@@ -109,14 +109,13 @@ with Flask-Script_:
     $ ./manage.py collect --remove
 
 
-.. _bagtracker:
+.. _bugtracker:
 
 Bug tracker
 ===========
 
-If you have any suggestions, bug reports or
-annoyances please report them to the issue tracker
-at https://github.com/klen/Flask-Collect/issues
+If you have any suggestions, bug reports or annoyances please report them
+to the issue tracker at https://github.com/klen/Flask-Collect/issues
 
 
 .. _contributing:
@@ -126,12 +125,15 @@ Contributors
 
 Maintainer: Kirill Klenov (horneds@gmail.com)
 
-Also see the `CONTRIBUTORS.rst <https://github.com/klen/Flask-Collect/blob/develop/CONTRIBUTORS.rst>`_ file.
+Also see the `CONTRIBUTORS.rst
+<https://github.com/klen/Flask-Collect/blob/develop/CONTRIBUTORS.rst>`_
+file.
 
 Contributing
 ============
 
-Development of flask-collect happens at github: https://github.com/klen/Flask-Collect
+Development of flask-collect happens at github:
+https://github.com/klen/Flask-Collect
 
 
 .. _license:

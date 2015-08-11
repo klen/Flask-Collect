@@ -49,7 +49,7 @@ method, this part of the documentation is for you.
 .. == bugtracker ==
 .. _bugtracker:
 .. include:: ../README.rst
-    :start-after: .. _bagtracker:
+    :start-after: .. _bugtracker:
     :end-before: .. _contributing:
 
 
