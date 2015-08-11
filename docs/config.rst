@@ -19,7 +19,7 @@ A list of configuration keys currently understood by the extension:
                                 By default: *<APP_ROOT>/static*.
 
 ``COLLECT_STORAGE``             Import path to storage backend.
-                                By default: *flask.ext.collect.storage.file*.
+                                By default: *flask_collect.storage.file*.
 
 ``COLLECT_FILTER``              Import path to filter function that can
                                 manipulate blueprints before iterating in

@@ -11,7 +11,7 @@ Welcome to Flask-Collect's documentation.
 Flask-Collect
 -------------
 
-.. automodule:: flask.ext.collect
+.. automodule:: flask_collect
 
 .. == badges ==
 .. _badges:
@@ -49,7 +49,7 @@ method, this part of the documentation is for you.
 .. == bugtracker ==
 .. _bugtracker:
 .. include:: ../README.rst
-    :start-after: .. _bagtracker:
+    :start-after: .. _bugtracker:
     :end-before: .. _contributing:
 
 

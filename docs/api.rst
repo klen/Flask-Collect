@@ -1,7 +1,7 @@
 API
 ---
 
-.. module:: flask.ext.collect
+.. module:: flask_collect
 
 This part of the documentation documents all the public classes and
 functions in Flask-Collect.
@@ -17,5 +17,5 @@ Configuration
 Storage
 ```````
 
-.. autoclass:: flask.ext.collect.storage.base.BaseStorage
+.. autoclass:: flask_collect.storage.base.BaseStorage
    :members:

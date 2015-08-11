@@ -60,7 +60,7 @@ class Collect(object):
         self.static_url = app.static_url_path
 
         self.storage = app.config.get(
-            'COLLECT_STORAGE', 'flask.ext.collect.storage.file')
+            'COLLECT_STORAGE', 'flask_collect.storage.file')
 
         filter_ = app.config.get('COLLECT_FILTER')
         if filter_ is not None and isinstance(filter_, string_types):

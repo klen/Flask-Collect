@@ -3,7 +3,7 @@
 Quickstart
 ==========
 
-.. currentmodule:: flask.ext.collect
+.. currentmodule:: flask_collect
 
 Flask-Collect is easy to use.  For the complete guide, checkout out the API documentation on the :class:`Collect` class.
 
