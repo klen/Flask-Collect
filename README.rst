@@ -73,7 +73,7 @@ Flask-Collect settings (default values): ::
     COLLECT_STATIC_ROOT = <APP.ROOT_PATH>/static
     COLLECT_STORAGE = 'flask_collect.storage.file'
 
-Initialize Flask-Collect extenstion: ::
+Initialize Flask-Collect extension: ::
 
     from flask_collect import Collect
 
@@ -93,6 +93,31 @@ If you use Flask-Script_, activate Flask-Collect commands: ::
     collect = Collect()
     collect.init_app(app)
     collect.init_script(manager)
+
+If you configure Flask via a factory function::
+
+    from flask_collect import Collect
+
+    ...
+
+    def create_app():
+        app = Flask()
+        ...
+        collect = Collect()
+        collect.init_app(app)
+
+        return app
+
+then you can do::
+
+    from flask_collect import CollectAssets
+    from myapp import create_app
+
+    ...
+    manager = Manager(create_app)
+    ...
+
+    manager.add_command('collect', CollectAssets())
 
 
 .. _usage:

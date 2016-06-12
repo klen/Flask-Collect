@@ -2,6 +2,7 @@
 
 """Define *Flask* extension."""
 
+import flask_script as script
 from flask._compat import string_types
 from werkzeug.utils import import_string
 from os import path as op
@@ -105,3 +106,16 @@ class Collect(object):
         cls = getattr(mod, 'Storage')
         storage = cls(self, verbose=verbose)
         return storage.run()
+
+
+class CollectAssets(script.Command):
+    """Collect assets when app is supplied to Manager as a factory function."""
+    option_list = (
+        script.Option('--verbose', '-v', dest='verbose', default=False, action='store_true'),
+    )
+
+    def run(self, verbose=False):
+        """Runs Collect.collect using the configured current app."""
+        from flask import current_app
+        configured_collect = current_app.extensions['collect']
+        configured_collect.collect(verbose=verbose)
