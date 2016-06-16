@@ -2,13 +2,54 @@
 
 """Define *Flask* extension."""
 
+from flask import current_app
 from flask._compat import string_types
+from werkzeug.local import LocalProxy
 from werkzeug.utils import import_string
 from os import path as op
 
+collect = LocalProxy(
+    lambda: current_app.extensions['collect'].collect
+)
+"""Helper proxy to collect state object."""
+
+
+class _CollectState(object):
+    """Extension state."""
+
+    def __init__(self, app):
+        """Build a new state object."""
+        self.app = app
+        self.static_root = app.config.get(
+            'COLLECT_STATIC_ROOT',
+            op.join(
+                app.root_path,
+                'static')).rstrip('/')
+        self.static_url = app.static_url_path
+
+        self.storage = app.config.get(
+            'COLLECT_STORAGE', 'flask_collect.storage.file')
+
+        filter_ = app.config.get('COLLECT_FILTER')
+        if filter_ is not None and isinstance(filter_, string_types):
+            filter_ = import_string(filter_)
+        self.filter = filter_ if filter_ is not None else list
+
+        # Save link on blueprints
+        self.blueprints = app.blueprints
+
+    def collect(self, verbose=False):
+        """Collect static files from blueprints.
+
+        :param verbose: Show debug information.
+        """
+        mod = import_string(self.storage)
+        cls = getattr(mod, 'Storage')
+        storage = cls(self, verbose=verbose)
+        return storage.run()
+
 
 class Collect(object):
-
     """Extension object for integration to one or more Flask applications.
 
     :param app: Flask application
@@ -31,12 +72,6 @@ class Collect(object):
 
     def __init__(self, app=None):
         """Initilize the extension object."""
-        self.app = None
-        self.static_root = None
-        self.static_url = None
-        self.storage = None
-        self.filter = None
-        self.blueprints = None
         if app:
             self.init_app(app)
 
@@ -49,26 +84,16 @@ class Collect(object):
         """
         if not hasattr(app, 'extensions'):
             app.extensions = dict()
-        app.extensions['collect'] = self
+        self._state = app.extensions['collect'] = _CollectState(app)
 
-        self.app = app
-        self.static_root = app.config.get(
-            'COLLECT_STATIC_ROOT',
-            op.join(
-                app.root_path,
-                'static')).rstrip('/')
-        self.static_url = app.static_url_path
+        if hasattr(app, 'cli'):
+            import click
 
-        self.storage = app.config.get(
-            'COLLECT_STORAGE', 'flask_collect.storage.file')
-
-        filter_ = app.config.get('COLLECT_FILTER')
-        if filter_ is not None and isinstance(filter_, string_types):
-            filter_ = import_string(filter_)
-        self.filter = filter_ if filter_ is not None else list
-
-        # Save link on blueprints
-        self.blueprints = app.blueprints
+            @app.cli.command()
+            @click.option('--verbose', is_flag=True)
+            def collect(verbose=True):
+                """Collect static files."""
+                collect(verbose=verbose)
 
     def init_script(self, manager):
         """Initialize collect scripts with `Flask-Script`_ manager instance.
@@ -90,18 +115,8 @@ class Collect(object):
 
         .. _Flask-Script: http://packages.python.org/Flask-Script/
         """
-        def collect(verbose=True):
-            """Collect static from blueprints."""
-            return self.collect(verbose=verbose)
-
         manager.command(collect)
 
-    def collect(self, verbose=False):
-        """Collect static files from blueprints.
-
-        :param verbose: Show debug information.
-        """
-        mod = import_string(self.storage)
-        cls = getattr(mod, 'Storage')
-        storage = cls(self, verbose=verbose)
-        return storage.run()
+    def __getattr__(self, name):
+        """Proxy to state object."""
+        return getattr(self._state, name, None)
