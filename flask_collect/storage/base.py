@@ -2,7 +2,7 @@
 #
 # This file is part of Flask-Collect.
 # Copyright (C) 2012, 2013 Kirill Klenov.
-# Copyright (C) 2014 CERN.
+# Copyright (C) 2014, 2016 CERN.
 #
 # Flask-Collect is free software; you can redistribute it and/or modify it
 # under the terms of the Revised BSD License; see LICENSE file for
@@ -45,8 +45,9 @@ class BaseStorage(object):
                                     bp.static_url_path.startswith(op.join(
                                         self.collect.static_url, '')))  # noqa
                         if relative:
-                            tpath = op.join(
-                                op.relpath(bp.static_url_path, self.collect.static_url), tpath)
+                            tpath = op.join(op.relpath(
+                                bp.static_url_path, self.collect.static_url
+                            ), tpath)
 
                         if tpath in destination_list:
                             self.log("{0} already sourced".format(tpath))

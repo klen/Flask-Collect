@@ -8,6 +8,7 @@ Setup module.
 
 """
 import re
+import sys
 
 from os import path
 from sys import version_info
@@ -24,6 +25,8 @@ def _read(fname):
 _meta = _read('flask_collect/__init__.py')
 _license = re.search(r'^__license__\s*=\s*"(.*)"', _meta, re.M).group(1)
 _version = re.search(r'^__version__\s*=\s*"(.*)"', _meta, re.M).group(1)
+
+needs_pytest = {'pytest', 'test', 'ptr'}.intersection(sys.argv)
 
 install_requires = [
     l for l in _read('requirements.txt').split('\n')
@@ -55,11 +58,15 @@ META_DATA = dict(
         'Topic :: Software Development :: Libraries :: Python Modules',
         'Topic :: Utilities',
     ],
-
     packages=find_packages(),
     include_package_data=True,
     install_requires=install_requires,
-    test_suite='tests',
+    setup_requires=[
+        'pytest-runner',
+    ] if needs_pytest else [],
+    tests_require=[
+        'pytest',
+    ],
 )
 
 
