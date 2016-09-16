@@ -104,17 +104,6 @@ If you configure Flask via a factory function::
 
         return app
 
-then you can do::
-
-    from flask_collect import CollectAssets
-    from myapp import create_app
-
-    ...
-    manager = Manager(create_app)
-    ...
-
-    manager.add_command('collect', CollectAssets())
-
 
 .. _usage:
 
@@ -125,9 +114,13 @@ From any python script: ::
 
     collect.collect(verbose=True)
 
-with Flask-Script_:
+with Flask-Script_: ::
 
     $ ./manage.py collect
+
+with Flask>=0.11: ::
+
+    $ flask collect
 
 
 .. _bugtracker:
