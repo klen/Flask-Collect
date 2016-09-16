@@ -14,7 +14,7 @@ branches:
         - master
         - develop
 
-install: pip install --quiet --use-mirrors tox coveralls
+install: pip install --quiet tox coveralls
 
 script: tox
 
