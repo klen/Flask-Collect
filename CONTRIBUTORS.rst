@@ -3,4 +3,5 @@
 * John Begeman (https://github.com/jawnb)
 * Patrick Altman (https://github.com/paltman)
 * Philippe Ombredanne (https://github.com/pombredanne)
+* Steve Schwarz (https://github.com/saschwarz)
 * Yoan Blanc (https://github.com/greut)
