@@ -127,11 +127,11 @@ Use Flask-Collect
 
 From any python script: ::
 
-    collect.collect(remove=True, verbose=True)
+    collect.collect(verbose=True)
 
 with Flask-Script_:
 
-    $ ./manage.py collect --remove
+    $ ./manage.py collect
 
 
 .. _bugtracker:
