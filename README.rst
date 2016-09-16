@@ -27,10 +27,6 @@ static files and copy them to specific folder (saves related paths).
     :target: https://pypi.python.org/pypi/flask-collect
     :alt: Downloads
 
-.. image:: http://img.shields.io/gratipay/klen.svg?style=flat-square
-    :target: https://www.gratipay.com/klen/
-    :alt: Donate
-
 
 .. _documentation:
 

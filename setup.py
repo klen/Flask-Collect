@@ -11,7 +11,6 @@ import re
 import sys
 
 from os import path
-from sys import version_info
 
 from setuptools import setup, find_packages
 
@@ -30,6 +29,10 @@ needs_pytest = {'pytest', 'test', 'ptr'}.intersection(sys.argv)
 
 install_requires = [
     l for l in _read('requirements.txt').split('\n')
+    if l and not l.startswith('#')]
+
+tests_requires = [
+    l for l in _read('requirements-test.txt').split('\n')
     if l and not l.startswith('#')]
 
 
@@ -64,9 +67,7 @@ META_DATA = dict(
     setup_requires=[
         'pytest-runner',
     ] if needs_pytest else [],
-    tests_require=[
-        'pytest',
-    ],
+    tests_require=tests_requires,
 )
 
 

@@ -7,7 +7,7 @@ help you collect them in one command. It checks application and blueprints for
 static files and copy them to specific folder (saves related paths).
 """
 
-from .collect import Collect, CollectAssets  # noqa
+from .collect import Collect
 
 __author__ = "Kirill Klenov <horneds@gmail.com>"
 __license__ = "BSD"

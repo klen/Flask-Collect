@@ -9,7 +9,7 @@ from werkzeug.local import LocalProxy
 from werkzeug.utils import import_string
 
 
-collect = LocalProxy(
+collect_proxy = LocalProxy(
     lambda: current_app.extensions['collect'].collect
 )
 
@@ -94,9 +94,9 @@ class Collect(object):
             @click.option('--verbose', is_flag=True)
             def collect(verbose=True):  # noqa
                 """Collect static files."""
-                collect(verbose=verbose)
+                collect_proxy(verbose=verbose)
 
-    def init_script(self, manager): # noqa
+    def init_script(self, manager):  # noqa
         """Initialize collect scripts with `Flask-Script`_ manager instance.
 
         :param manager: `Flask-Script`_ manager
@@ -116,7 +116,7 @@ class Collect(object):
 
         .. _Flask-Script: http://packages.python.org/Flask-Script/
         """
-        manager.command(collect)
+        manager.command(collect_proxy)
 
     def __getattr__(self, name):
         """Proxy to state object."""
