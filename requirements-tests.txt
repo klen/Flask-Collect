@@ -1,4 +1,4 @@
-pytest
+pytest==5.2.0
 pytest-cov
 pytest-pep8
 pytest-sugar
